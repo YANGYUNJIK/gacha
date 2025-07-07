@@ -1,13 +1,29 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@layer utilities {
+  .animate-bounce-left {
+    animation: bounceLeft 1.5s infinite ease-in-out;
+  }
+
+  .animate-bounce-right {
+    animation: bounceRight 1.5s infinite ease-in-out;
+  }
+
+  @keyframes bounceLeft {
+    0%   { transform: translate(0, 0); }
+    25%  { transform: translate(-20px, -60px); }
+    50%  { transform: translate(-40px, 0); }
+    75%  { transform: translate(-20px, -40px); }
+    100% { transform: translate(0, 0); }
+  }
+
+  @keyframes bounceRight {
+    0%   { transform: translate(0, 0); }
+    25%  { transform: translate(20px, -60px); }
+    50%  { transform: translate(40px, 0); }
+    75%  { transform: translate(20px, -40px); }
+    100% { transform: translate(0, 0); }
+  }
 }

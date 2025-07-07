@@ -1,24 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+// src/App.js
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"; // ✅ 추가
+import GachaDemo from "./pages/GachaDemo";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      {" "}
+      {/* ✅ 루트에 Router로 감싸기 */}
+      <div className="min-h-screen bg-gray-50 flex flex-col">
+        <main className="flex-grow">
+          <Routes>
+            {/* ✅ Routes로 감싸고 Route 설정 */}
+            <Route path="/" element={<GachaDemo />} />
+          </Routes>
+        </main>
+      </div>
+    </Router>
   );
 }
 

@@ -1,0 +1,12 @@
+@keyframes rollToCenter {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.capsule-rolling {
+  animation: rollToCenter 1s ease-in-out;
+}
