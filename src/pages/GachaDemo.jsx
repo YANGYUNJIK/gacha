@@ -11,13 +11,6 @@ const capsuleImages = [
   "/capsule-yellow.png",
 ];
 
-// const cardBackImages = [
-//   "/card-back-1.png",
-//   "/card-back-2.png",
-//   "/card-back-3.png",
-//   "/card-back-4.png",
-// ];
-
 const generateLoopingFountainPath = (direction = 1, steps = 40) => {
   const x = [],
     y = [];
@@ -120,31 +113,11 @@ export default function GachaDemo() {
   const [flippedCardIndices, setFlippedCardIndices] = useState([]);
   const [cardQuestions, setCardQuestions] = useState([]);
 
-  //const [cardBacks, setCardBacks] = useState([]);
-
-  //const [answers, setAnswers] = useState([null, null, null, null]); // 각 카드의 O/X 상태
-
   const capsulePosition = { bottom: "50px", left: "267px" };
   const openCapsulePosition = { bottom: "50px", left: "253px" };
   const openlightPosition = { bottom: "70px", left: "253px" };
 
-  const questions = [
-    // "Q1. React에서 상태를 변경하는 Hook은?",
-    // "Q2. JavaScript에서 변수 선언 키워드는?",
-    // "Q3. HTML에서 링크 태그는?",
-    // "Q4. CSS에서 색상 지정 방법 중 틀린 것은?",
-    // "Q5. Flexbox의 기본 축은 무엇인가요?",
-    // "Q6. 상태 관리 라이브러리로 올바른 것은?",
-    // "Q7. 브라우저의 localStorage는 어떤 데이터 저장?",
-    // "Q8. JSX에서 class 대신 사용하는 속성은?",
-    // "Q9. useEffect의 두 번째 인자는 무엇인가요?",
-    // "Q10. React의 컴포넌트 이름은 어떤 형식?",
-    "1등",
-    "2등",
-    "3등",
-    "4등",
-    "5등",
-  ];
+  const questions = ["1등", "2등", "3등", "4등", "5등"];
 
   const handleReset = () => {
     setCapsuleStage("idle");
@@ -153,7 +126,6 @@ export default function GachaDemo() {
     setShowCards(false);
     setFlippedCardIndices([]);
     setCardQuestions([]);
-    //setAnswers([null, null, null, null, null]);
   };
 
   const handleLeverClick = async () => {
@@ -181,8 +153,6 @@ export default function GachaDemo() {
     const shuffled = [...questions].sort(() => 0.5 - Math.random());
     const selected5 = shuffled.slice(0, 5); // ✅ 5개 선택
     setCardQuestions(selected5);
-    const redBacks = Array.from({ length: 5 }, () => cardBackRed); // ✅ 전부 빨간색
-    //setCardBacks(redBacks);
     setShowCards(true);
   };
 
@@ -207,7 +177,8 @@ export default function GachaDemo() {
         },
       });
     });
-  }, [controlsList]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (capsuleStage === "landed") {
