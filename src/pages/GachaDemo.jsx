@@ -11,12 +11,12 @@ const capsuleImages = [
   "/capsule-yellow.png",
 ];
 
-const cardBackImages = [
-  "/card-back-1.png",
-  "/card-back-2.png",
-  "/card-back-3.png",
-  "/card-back-4.png",
-];
+// const cardBackImages = [
+//   "/card-back-1.png",
+//   "/card-back-2.png",
+//   "/card-back-3.png",
+//   "/card-back-4.png",
+// ];
 
 const generateLoopingFountainPath = (direction = 1, steps = 40) => {
   const x = [],
@@ -120,9 +120,9 @@ export default function GachaDemo() {
   const [flippedCardIndices, setFlippedCardIndices] = useState([]);
   const [cardQuestions, setCardQuestions] = useState([]);
 
-  const [cardBacks, setCardBacks] = useState([]);
+  //const [cardBacks, setCardBacks] = useState([]);
 
-  const [answers, setAnswers] = useState([null, null, null, null]); // 각 카드의 O/X 상태
+  //const [answers, setAnswers] = useState([null, null, null, null]); // 각 카드의 O/X 상태
 
   const capsulePosition = { bottom: "50px", left: "267px" };
   const openCapsulePosition = { bottom: "50px", left: "253px" };
@@ -153,7 +153,7 @@ export default function GachaDemo() {
     setShowCards(false);
     setFlippedCardIndices([]);
     setCardQuestions([]);
-    setAnswers([null, null, null, null, null]);
+    //setAnswers([null, null, null, null, null]);
   };
 
   const handleLeverClick = async () => {
@@ -182,7 +182,7 @@ export default function GachaDemo() {
     const selected5 = shuffled.slice(0, 5); // ✅ 5개 선택
     setCardQuestions(selected5);
     const redBacks = Array.from({ length: 5 }, () => cardBackRed); // ✅ 전부 빨간색
-    setCardBacks(redBacks);
+    //setCardBacks(redBacks);
     setShowCards(true);
   };
 
@@ -207,7 +207,7 @@ export default function GachaDemo() {
         },
       });
     });
-  }, []);
+  }, [controlsList]);
 
   useEffect(() => {
     if (capsuleStage === "landed") {
