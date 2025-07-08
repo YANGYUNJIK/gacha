@@ -119,6 +119,22 @@ export default function GachaDemo() {
 
   const questions = ["1등", "2등", "3등", "4등", "5등"];
 
+  const rankFontSize = {
+    "1등": "text-4xl",
+    "2등": "text-3xl",
+    "3등": "text-2xl",
+    "4등": "text-xl",
+    "5등": "text-lg",
+  };
+
+  const questionProbabilities = {
+    "1등": "1%",
+    "2등": "6%",
+    "3등": "13%",
+    "4등": "30%",
+    "5등": "50%",
+  };
+
   const handleReset = () => {
     setCapsuleStage("idle");
     setSelectedColor(null);
@@ -126,6 +142,15 @@ export default function GachaDemo() {
     setShowCards(false);
     setFlippedCardIndices([]);
     setCardQuestions([]);
+  };
+
+  const getRandomRank = () => {
+    const rand = Math.random() * 100;
+    if (rand < 1) return "1등";
+    else if (rand < 7) return "2등"; // 1% + 6%
+    else if (rand < 20) return "3등"; // 1% + 6% + 13%
+    else if (rand < 50) return "4등"; // +30%
+    else return "5등"; // 나머지 50%
   };
 
   const handleLeverClick = async () => {
@@ -145,7 +170,15 @@ export default function GachaDemo() {
 
   const handleCardClick = (index) => {
     if (flippedCardIndices.includes(index)) return;
+
+    const newRank = getRandomRank();
     setFlippedCardIndices((prev) => [...prev, index]);
+
+    setCardQuestions((prev) => {
+      const updated = [...prev];
+      updated[index] = newRank;
+      return updated;
+    });
   };
 
   const handleGlowComplete = () => {
@@ -154,6 +187,7 @@ export default function GachaDemo() {
     const selected5 = shuffled.slice(0, 5); // ✅ 5개 선택
     setCardQuestions(selected5);
     setShowCards(true);
+    setCardQuestions(["", "", "", "", ""]);
   };
 
   useEffect(() => {
@@ -319,26 +353,22 @@ export default function GachaDemo() {
                   style={{ transformStyle: "preserve-3d", perspective: 1000 }}
                 >
                   {/* 카드 앞면 */}
-
                   <div
                     className="absolute w-full h-full backface-hidden bg-white border flex items-center justify-center p-4"
                     style={{ transform: "rotateY(180deg)" }}
                   >
-                    {isFlipped && (
-                      <div
-                        className={`text-center font-bold ${
-                          i === 0
-                            ? "text-4xl"
-                            : i === 1
-                            ? "text-3xl"
-                            : i === 2
-                            ? "text-2xl"
-                            : i === 3
-                            ? "text-xl"
-                            : "text-lg"
-                        }`}
-                      >
-                        {cardQuestions[i]}
+                    {isFlipped && cardQuestions[i] && (
+                      <div className="text-center">
+                        <div
+                          className={`font-bold ${
+                            rankFontSize[cardQuestions[i]]
+                          }`}
+                        >
+                          {cardQuestions[i]}
+                        </div>
+                        <div className="text-sm text-gray-500">
+                          ({questionProbabilities[cardQuestions[i]]})
+                        </div>
                       </div>
                     )}
                   </div>
