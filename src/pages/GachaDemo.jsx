@@ -232,13 +232,6 @@ export default function GachaDemo() {
     <div className="min-h-screen bg-white flex flex-col items-center justify-center px-4 md:px-10">
       <div className="flex items-center gap-4 mb-8">
         <h1 className="text-3xl font-bold text-green-700">🎰 상품 추천</h1>
-        <button
-          onClick={handleReset}
-          className="text-red-500 hover:text-red-600 text-2xl z-[10000]"
-          title="다시 뽑기"
-        >
-          🔁
-        </button>
       </div>
 
       {/* 반응형 레이아웃 */}
@@ -388,6 +381,18 @@ export default function GachaDemo() {
               </motion.div>
             );
           })}
+        </div>
+      )}
+
+      {/* ✅ 오른쪽 아래 고정된 다시 뽑기 버튼 */}
+      {showCards && (
+        <div className="fixed bottom-6 right-6 z-[9999]">
+          <button
+            onClick={handleReset}
+            className="bg-white-500 text-white px-5 py-3 rounded-full shadow-lg text-lg hover:bg-red-600 transition"
+          >
+            🔁
+          </button>
         </div>
       )}
     </div>
